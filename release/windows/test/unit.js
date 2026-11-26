@@ -1,0 +1,16 @@
+const assert=require('assert'),path=require('path'),L=require('../lib');
+let n=0;const t=(name,f)=>{try{f();n++;console.log('  ok  ',name)}catch(e){console.log('  FAIL',name,e.message);process.exitCode=1}};
+t('isInside aceita filho e a própria pasta',()=>{assert(L.isInside('/a/b','/a/b/c.png'));assert(L.isInside('/a/b','/a/b'))});
+t('isInside rejeita irmão com prefixo igual',()=>assert(!L.isInside('/a/b','/a/bc/x.png')));
+t('isInside rejeita ../',()=>assert(!L.isInside('/a/b','/a/b/../c/x.png')));
+t('safeAppFile: index por padrão',()=>assert.strictEqual(L.safeAppFile('/app','/'),path.resolve('/app/index.html')));
+t('safeAppFile: bloqueia travessia',()=>{for(const p of['/../main.js','/%2e%2e/main.js','/..%2fmain.js','/a/../../x','/%00','/..\\x'])assert.strictEqual(L.safeAppFile('/app',p),null,p)});
+t('b64u ida e volta (acentos e espaços)',()=>{const s='C:\\Users\\João Silva\\Imagens\\foto ç.png';assert.strictEqual(L.b64uDecode(L.b64uEncode(s)),s)});
+t('cleanExt',()=>{assert.strictEqual(L.cleanExt('JPEG'),'jpg');assert.strictEqual(L.cleanExt('.webp'),'webp');assert.strictEqual(L.cleanExt('exe'),'png');assert.strictEqual(L.cleanExt('bmp'),'png')});
+t('uniqueName nunca repete e limpa caracteres',()=>{const used=new Set();const ex=f=>used.has(f);const a=L.uniqueName('/d','a/b:c','png',ex);used.add(a);const b=L.uniqueName('/d','a/b:c','png',ex);assert.notStrictEqual(a,b);assert(!path.basename(a).includes(':'))});
+t('IMG_RE só aceita os 5 formatos',()=>{for(const f of['a.png','a.JPG','a.jpeg','a.webp','a.bmp'])assert(L.IMG_RE.test(f));for(const f of['a.gif','a.exe','a.png.exe','a.svg'])assert(!L.IMG_RE.test(f))});
+t('AUDIO_RE só aceita mp3/wav/flac/ogg',()=>{for(const f of['a.mp3','a.WAV','a.flac','a.ogg','a.oga'])assert(L.AUDIO_RE.test(f));for(const f of['a.m4a','a.exe','a.mp3.exe','a.png','a.txt'])assert(!L.AUDIO_RE.test(f))});
+t('parseRange: sem cabeçalho = null',()=>{assert.strictEqual(L.parseRange(null,100),null);assert.strictEqual(L.parseRange('',100),null)});
+t('parseRange: intervalos válidos',()=>{assert.deepStrictEqual(L.parseRange('bytes=0-9',100),{start:0,end:9});assert.deepStrictEqual(L.parseRange('bytes=50-',100),{start:50,end:99});assert.deepStrictEqual(L.parseRange('bytes=-10',100),{start:90,end:99});assert.deepStrictEqual(L.parseRange('bytes=90-500',100),{start:90,end:99});assert.deepStrictEqual(L.parseRange('bytes=-500',100),{start:0,end:99})});
+t('parseRange: inválidos = bad',()=>{for(const h of['bytes=100-120','bytes=9-2','bytes=-','bytes=-0','abc','bytes=a-b','bytes=0-1,5-6'])assert.strictEqual(L.parseRange(h,100),'bad',h);assert.strictEqual(L.parseRange('bytes=0-1',0),'bad')});
+console.log(n+' testes de lib ok');

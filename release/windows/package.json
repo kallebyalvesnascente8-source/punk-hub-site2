@@ -1,0 +1,75 @@
+{
+  "name": "punk-hub",
+  "productName": "PUNK HUB",
+  "version": "1.1.0",
+  "description": "PUNK HUB: painel desktop pessoal inspirado em Arch Linux e KDE Plasma",
+  "main": "main.js",
+  "author": "PUNK",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/unit.js && node test/agent.test.js",
+    "dist": "electron-builder --win nsis --x64",
+    "pack": "electron-builder --win dir --x64",
+    "fix-electron": "node scripts/ensure-electron.js",
+    "predist": "node scripts/ensure-electron.js",
+    "prepack": "node scripts/ensure-electron.js"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.punk.hub",
+    "productName": "PUNK HUB",
+    "executableName": "PUNK HUB",
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib.js",
+      "agent.js",
+      "app/**/*",
+      "build/icon.ico",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "compression": "maximum",
+    "asar": true,
+    "electronLanguages": [
+      "pt-BR",
+      "en-US"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "PUNK-HUB-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PUNK HUB",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "language": "1046"
+    },
+    "electronDist": "node_modules/electron/dist"
+  },
+  "allowScripts": {
+    "electron": true
+  }
+}

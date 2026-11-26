@@ -1,0 +1,16 @@
+{
+  "appId": "com.punk.hub.mobile",
+  "appName": "PUNK HUB",
+  "webDir": "www",
+  "backgroundColor": "#0d0f0e",
+  "server": { "androidScheme": "https" },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#0d0f0e",
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 600, "backgroundColor": "#0d0f0e", "showSpinner": false },
+    "StatusBar": { "style": "DARK", "backgroundColor": "#0d0f0e" }
+  }
+}

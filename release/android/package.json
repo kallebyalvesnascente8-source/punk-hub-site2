@@ -1,0 +1,25 @@
+{
+  "name": "punk-hub-android",
+  "productName": "PUNK HUB",
+  "version": "1.1.0",
+  "description": "PUNK HUB para Android (Capacitor). Independente da versao Windows.",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "apk": "node scripts/build-apk.js",
+    "sync": "node scripts/build-apk.js --sync-only",
+    "check": "node scripts/check-web.js"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/filesystem": "^8.0.0",
+    "@capacitor/share": "^8.0.0",
+    "@capacitor/splash-screen": "^8.0.0",
+    "@capacitor/status-bar": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.0.0"
+  }
+}

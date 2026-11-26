@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PUNK HUB | Downloads oficiais</title>
+<meta name="description" content="PUNK HUB: painel pessoal offline para Windows e Android, com temas, fotos, música, rádios e PUNK AI. Baixe o instalador oficial.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="img/lebinho.jpg">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:"Space Grotesk",system-ui,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;background:#0b0b0c;color:#fff;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}
+.bg{position:fixed;inset:0;background:linear-gradient(#cfcfcf 0%,#9a9a9a 38%,#4a4a4a 52%,#0a0a0a 70%);z-index:0}
+.bg svg{position:absolute;bottom:0;width:100%;height:62%}
+.fog{position:fixed;inset:0;z-index:1;background:radial-gradient(120% 40% at 50% 85%,rgba(210,210,210,.35),transparent 70%);pointer-events:none}
+canvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+#enter{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(20,20,20,.35);font-size:32px;font-weight:700;cursor:pointer;border:0;width:100%;color:#fff;transition:opacity .6s}
+#enter.off{opacity:0;pointer-events:none}
+main{position:relative;z-index:5;display:flex;justify-content:center;padding:48px 14px 60px}
+.card{width:min(560px,100%);background:#000;border-radius:14px;padding:22px 20px 18px;box-shadow:0 20px 70px rgba(0,0,0,.6);text-align:center}
+.av{width:92px;height:92px;border-radius:50%;margin:0 auto 10px;display:block;object-fit:cover;box-shadow:0 0 0 3px #111}
+h1{font-size:30px;letter-spacing:-.02em}
+.sub{margin:4px 0 0;color:#00ff88;font-weight:700;font-size:13px;letter-spacing:.14em}
+.bio{margin:10px 0 16px;font-weight:600;font-size:15px}
+.chips{display:flex;justify-content:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.chip{border:1px solid #222;border-radius:999px;padding:4px 12px;font-size:12px;color:#bbb}
+.lk{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid #232323;background:#0c0c0c;border-radius:10px;padding:11px 12px;margin-bottom:10px;transition:.18s}
+a.lk:hover{border-color:#00ff88;transform:translateY(-1px)}
+.lk.rec{border-color:#00ff88;background:#06130d;box-shadow:0 0 0 1px #00ff8855}
+.lk.off{opacity:.55;pointer-events:none}
+.ic{width:42px;height:42px;border-radius:9px;background:#151515;border:1px solid #262626;display:grid;place-items:center;flex:none}
+.lk b{display:block;font-size:15px}.lk small{color:#9a9a9a;font-size:12px}
+.tag{margin-left:auto;font-size:11px;background:#00ff88;color:#04140c;border-radius:999px;padding:2px 9px;font-weight:700;display:none;white-space:nowrap}
+.rec .tag{display:block}
+.ext{margin-left:auto;flex:none;opacity:.6}.rec .ext{display:none}
+#msg{color:#bbb;font-size:13px;margin:-2px 0 12px;min-height:1em}
+.ac{border-top:1px solid #1b1b1b;margin-top:6px}
+.ac>button{width:100%;background:none;border:0;padding:12px 4px;text-align:left;font-weight:700;display:flex;justify-content:space-between}
+.ac>button:focus-visible,.lk:focus-visible,#enter:focus-visible{outline:2px solid #00ff88;outline-offset:2px}
+.ac .bd{display:none;padding:0 4px 12px;text-align:left;color:#cfcfcf;font-size:14px;line-height:1.55}
+.ac.open .bd{display:block}.ac.open>button span:last-child{transform:rotate(45deg)}
+.ac img{width:100%;border-radius:8px;border:1px solid #222;margin-top:8px;display:block}
+.ac ul{padding-left:18px}.ac li{margin-bottom:4px}
+.foot{margin-top:12px;color:#aaa;font-size:13px}
+.foot a{text-decoration:underline}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}canvas{display:none}}
+</style>
+</head>
+<body>
+<div class="bg"><svg viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1a1a"/><stop offset="1" stop-color="#000"/></linearGradient></defs><path fill="url(#g)" d="M0 500V260l20-40 18 30 22-70 20 60 24-50 20 40 26-90 24 80 22-50 24 60 20-30 30 70 26-60 22 40 28-80 24 70 20-40 30 60 22-50 26 40V500z"/><path fill="#050505" d="M700 500V300l20-40 18 40 22-80 20 70 24-60 20 50 26-100 24 90 22-60 24 70 20-40 30 80 26-70 22 50 28-90 24 80 20-50 30 70 22-60 26 50 28-40 30 70 20-30V500z"/></svg></div>
+<div class="fog"></div><canvas id="rain" aria-hidden="true"></canvas>
+<button id="enter" type="button">Clique aqui</button>
+<main><div class="card">
+<img class="av" src="img/lebinho.jpg" alt="Foto de lebinho" width="92" height="92">
+<h1>lebinho</h1><p class="sub">PUNK HUB</p>
+<p class="bio">Seu painel pessoal, offline, para Windows e Android</p>
+<div class="chips"><span class="chip" id="chv">Versão ...</span><span class="chip" id="chd">... downloads</span><span class="chip">Sem anúncios</span></div>
+<a class="lk off" id="b-exe" data-os="exe" href="#" aria-disabled="true"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><span><b>Baixar para Windows</b><small id="s-exe">Instalador .exe</small></span><span class="tag">Para o seu aparelho</span><svg class="ext" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v6H4V5h6"/></svg></a>
+<a class="lk off" id="b-apk" data-os="apk" href="#" aria-disabled="true"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00ff88" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><span><b>Baixar para Android</b><small id="s-apk">Arquivo .apk</small></span><span class="tag">Para o seu aparelho</span><svg class="ext" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v6H4V5h6"/></svg></a>
+<p id="msg" role="status">Procurando a versão mais recente...</p>
+<div class="ac"><button type="button" aria-expanded="false"><span>Recursos</span><span>+</span></button><div class="bd"><ul><li>Temas, wallpapers e personagens que valem para o Hub inteiro</li><li>Fotos com editor que preserva o original</li><li>Música com playlists, rádios online e pastas detectadas</li><li>PUNK AI rodando no seu próprio aparelho</li><li>Funciona offline, sem conta e sem anúncios</li></ul><img src="img/home.jpg" alt="Tela inicial do PUNK HUB" loading="lazy"></div></div>
+<div class="ac"><button type="button" aria-expanded="false"><span>Capturas</span><span>+</span></button><div class="bd"><img src="img/music.jpg" alt="Módulo de música" loading="lazy"><img src="img/themes.jpg" alt="Configurações de cores e estilo" loading="lazy"></div></div>
+<div class="ac"><button type="button" aria-expanded="false"><span>Como instalar</span><span>+</span></button><div class="bd"><ul><li><b>Windows:</b> baixe o instalador, abra e siga em Avançar até concluir. Se o Windows avisar "protegeu seu PC", toque em Mais informações e depois em Executar assim mesmo.</li><li><b>Android:</b> baixe o arquivo .apk, abra e permita instalar de fontes desconhecidas quando o celular pedir. Para atualizar, instale a versão nova por cima.</li></ul></div></div>
+<div class="ac"><button type="button" aria-expanded="false"><span id="nt">Novidades</span><span>+</span></button><div class="bd"><ul id="nl"><li>Carregando...</li></ul></div></div>
+<p class="foot">O app avisa sozinho quando sai versão nova. <a id="rl" href="#">Todas as versões</a></p>
+</div></main>
+<script>
+(function(){
+"use strict";
+var $=function(i){return document.getElementById(i)};
+/* repositório: vem da própria URL do GitHub Pages (usuario.github.io/repositorio); ?repo=usuario/repositorio serve para testar */
+function repo(){var q=/^[\w.-]+\/[\w.-]+$/,p=new URLSearchParams(location.search).get("repo");if(p&&q.test(p))return p;
+ var m=/^([\w-]+)\.github\.io$/i.exec(location.hostname),seg=location.pathname.split("/").filter(Boolean)[0];
+ if(m&&seg&&!/\.html?$/i.test(seg))return m[1]+"/"+seg;return""}
+var REPO=repo(),UA=navigator.userAgent||"",OS=/Android/i.test(UA)?"apk":/Windows/i.test(UA)?"exe":"";
+if(OS)$("b-"+OS).classList.add("rec");
+function mb(n){return(n/1048576).toFixed(0)+" MB"}
+function setBtn(k,a,tag){var el=$("b-"+k);if(!a){el.classList.add("off");el.setAttribute("aria-disabled","true");el.removeAttribute("href");return}
+ var ok=/^https:\/\/github\.com\//.test(a.browser_download_url);if(!ok)return;el.href=a.browser_download_url;el.classList.remove("off");el.removeAttribute("aria-disabled");
+ $("s-"+k).textContent=(k==="exe"?"Instalador .exe":"Arquivo .apk")+" · "+mb(a.size)}
+function none(t){$("msg").textContent=t;$("chv").textContent="Versão ...";$("chd").textContent="Em breve";$("nl").innerHTML="";var li=document.createElement("li");li.textContent="Ainda não há novidades publicadas.";$("nl").appendChild(li)}
+if(!REPO){none("Site ainda não ligado a um repositório do GitHub. Publique pelo GitHub Pages (veja o PUBLICAR.md).");$("rl").style.display="none"}
+else{$("rl").href="https://github.com/"+REPO+"/releases";
+ fetch("https://api.github.com/repos/"+REPO+"/releases?per_page=20",{headers:{accept:"application/vnd.github+json"}}).then(function(r){
+  if(!r.ok)throw new Error(r.status);return r.json()}).then(function(L){
+  L=L.filter(function(x){return x&&!x.draft&&!x.prerelease&&/^v?\d+\.\d+\.\d+/.test(x.tag_name||"")});
+  if(!L.length){none("A primeira versão ainda não foi publicada. Volte em breve.");return}
+  var r=L[0],A=r.assets||[],exe=A.filter(function(a){return /\.exe$/i.test(a.name)})[0],apk=A.filter(function(a){return /\.apk$/i.test(a.name)})[0];
+  setBtn("exe",exe);setBtn("apk",apk);
+  var ver=String(r.tag_name).replace(/^v/,"");$("chv").textContent="Versão "+ver;$("nt").textContent="Novidades da versão "+ver;
+  var dl=0;L.forEach(function(x){(x.assets||[]).forEach(function(a){if(/\.(exe|apk)$/i.test(a.name))dl+=+a.download_count||0})});$("chd").textContent=dl.toLocaleString("pt-BR")+" downloads";
+  $("msg").textContent=exe||apk?"":"Esta versão ainda não tem arquivos para baixar.";
+  if(OS==="exe"&&!exe||OS==="apk"&&!apk)$("msg").textContent="Esta versão ainda não tem o arquivo para o seu aparelho.";
+  if(!OS&&(exe||apk))$("msg").textContent="Escolha a versão para o seu aparelho.";
+  var lines=String(r.body||"").split(/\r?\n/).map(function(s){return s.replace(/^\s*[-*]\s+/,"").replace(/^#+\s*/,"").replace(/\*\*|__|`/g,"").trim()}).filter(function(s){return s&&!/^(full changelog|what's changed)/i.test(s)}).slice(0,8);
+  $("nl").innerHTML="";(lines.length?lines:["Melhorias e correções."]).forEach(function(s){var li=document.createElement("li");li.textContent=s.slice(0,200);$("nl").appendChild(li)})
+ }).catch(function(){none("Não foi possível consultar as versões agora. Tente de novo em instantes.")})}
+/* acordeões */
+document.querySelectorAll(".ac>button").forEach(function(b){b.onclick=function(){var o=b.parentElement.classList.toggle("open");b.setAttribute("aria-expanded",o)}});
+$("enter").onclick=function(){this.classList.add("off")};
+/* chuva leve (pausa com a aba escondida; desligada se o sistema pede menos movimento) */
+var c=$("rain"),x=c.getContext("2d"),W,H,d=[],run=!matchMedia("(prefers-reduced-motion:reduce)").matches;
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight;d=[];for(var i=0;i<Math.round(W/14);i++)d.push({x:Math.random()*W,y:Math.random()*H,l:8+Math.random()*26,s:3+Math.random()*5})}
+rs();addEventListener("resize",rs);
+(function f(){if(run&&!document.hidden){x.clearRect(0,0,W,H);x.strokeStyle="rgba(255,255,255,.28)";x.beginPath();for(var i=0;i<d.length;i++){var r=d[i];x.moveTo(r.x,r.y);x.lineTo(r.x-r.l*.18,r.y+r.l);r.y+=r.s;r.x-=r.s*.18;if(r.y>H){r.y=-20;r.x=Math.random()*W+40}}x.stroke()}requestAnimationFrame(f)})();
+})();
+</script>
+</body>
+</html>
